@@ -32,6 +32,42 @@ This build is customized and maintained by Zireku for production bot architectur
 - No obfuscation. Easy to read and audit.
 - No auto-follow channel behavior.
 
+> [!IMPORTANT]
+> Hi everyone,
+>
+> I want to clarify two separate attribution issues regarding packages derived from this fork.
+>
+> 1. Direct redistribution of modifications without attribution
+>
+> The following packages are operated by the same individual under multiple npm accounts:
+>
+> - [@nuisockets](https://www.npmjs.com/package/@nuisockets/baileys)
+> - [@nuiisatoru](https://www.npmjs.com/package/@nuiisatoru/baileys)
+> - [@nuiisweetberry](https://www.npmjs.com/package/@nuiisweetberry/baileys)
+> - [@nuiisweety](https://www.npmjs.com/package/@nuiisweety/baileys)
+>
+> These packages redistribute files and modifications originating from this fork while removing contributor credits and modification notes.
+>
+> 2. Rebranded republishes of this fork
+>
+> - [@lumina-md](https://www.npmjs.com/package/@lumina-md/baileys)
+> - [@sairidev](https://www.npmjs.com/package/@sairidev/baileys-new)
+> - [@lordmega/baileys](https://www.npmjs.com/package/@lordmega/baileys)
+> - [phantom-baileys](https://www.npmjs.com/package/phantom-baileys)
+> - [nexora-baileys](https://www.npmjs.com/package/nexora-baileys)
+>
+> These packages primarily repackage or republish this fork under different names while failing to preserve proper attribution, credits, or modification notes.
+> 
+> To be clear, I am **NOT** the original maintainer of Baileys. Full credit and respect belong to:
+>
+> https://github.com/WhiskeySockets/Baileys
+>
+> **Forking is completely acceptable. Removing attribution, contributor credits, or modification history is not.**
+>
+> Please report if necessary.
+>
+> Thank you.
+
 > [!NOTE]
 > This project is a customized distribution based on [@itsliaaa/baileys](https://www.npmjs.com/package/@itsliaaa/baileys) by Lia Wynn, which itself is derived from the upstream project [WhiskeySockets/Baileys](https://github.com/WhiskeySockets/Baileys). Full attribution and credit belong to the upstream authors.
 
