@@ -1,6 +1,6 @@
 {
    "name": "@zireku/baileys",
-   "version": "0.3.23",
+   "version": "0.3.24",
    "description": "Enhanced Baileys WhatsApp Web API engine optimized by Zireku for high-performance bot architectures.",
    "main": "lib/index.js",
    "types": "lib/index.d.ts",
