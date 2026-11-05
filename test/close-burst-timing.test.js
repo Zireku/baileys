@@ -3,7 +3,7 @@ import test from 'node:test';
 import { registerWebSocketClose } from '../lib/Socket/close-burst-timing.js';
 
 test('allows a small canary set to reconnect immediately', () => {
-    const state = { windowStartedAt: 0, count: 0 };
+    const state = { count: 0, lastCloseAt: 0, nextSlotAt: 0 };
     for (let index = 0; index < 8; index += 1) {
         assert.deepEqual(registerWebSocketClose(state, 1000), {
             burstCount: index + 1,
@@ -13,19 +13,19 @@ test('allows a small canary set to reconnect immediately', () => {
 });
 
 test('spreads the remainder of a close burst', () => {
-    const state = { windowStartedAt: 1000, count: 8 };
+    const state = { count: 8, lastCloseAt: 1000, nextSlotAt: 0 };
     assert.deepEqual(registerWebSocketClose(state, 1200, () => 0), {
         burstCount: 9,
         delayMs: 10000
     });
     assert.deepEqual(registerWebSocketClose(state, 1300, () => 0.999), {
         burstCount: 10,
-        delayMs: 11249
+        delayMs: 11149
     });
 });
 
 test('assigns one reconnect slot per socket', () => {
-    const state = { windowStartedAt: 1000, count: 8 };
+    const state = { count: 8, lastCloseAt: 1000, nextSlotAt: 0 };
     const delays = Array.from({ length: 147 }, () =>
         registerWebSocketClose(state, 1200, () => 0).delayMs
     );
@@ -34,9 +34,17 @@ test('assigns one reconnect slot per socket', () => {
     assert.equal(new Set(delays).size, delays.length);
 });
 
-test('starts a fresh burst window after quiet time', () => {
-    const state = { windowStartedAt: 1000, count: 100 };
-    assert.deepEqual(registerWebSocketClose(state, 3000), {
+test('does not reset while assigned reconnect slots are still draining', () => {
+    const state = { count: 100, lastCloseAt: 1000, nextSlotAt: 60000 };
+    assert.deepEqual(registerWebSocketClose(state, 40000, () => 0), {
+        burstCount: 101,
+        delayMs: 21000
+    });
+});
+
+test('starts a fresh recovery generation only after queue and close stream are quiet', () => {
+    const state = { count: 100, lastCloseAt: 1000, nextSlotAt: 2000 };
+    assert.deepEqual(registerWebSocketClose(state, 40000), {
         burstCount: 1,
         delayMs: 0
     });
