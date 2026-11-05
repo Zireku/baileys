@@ -20,8 +20,18 @@ test('spreads the remainder of a close burst', () => {
     });
     assert.deepEqual(registerWebSocketClose(state, 1300, () => 0.999), {
         burstCount: 10,
-        delayMs: 59950
+        delayMs: 11249
     });
+});
+
+test('assigns one reconnect slot per socket', () => {
+    const state = { windowStartedAt: 1000, count: 8 };
+    const delays = Array.from({ length: 147 }, () =>
+        registerWebSocketClose(state, 1200, () => 0).delayMs
+    );
+    assert.equal(delays[0], 10000);
+    assert.equal(delays.at(-1), 156000);
+    assert.equal(new Set(delays).size, delays.length);
 });
 
 test('starts a fresh burst window after quiet time', () => {
