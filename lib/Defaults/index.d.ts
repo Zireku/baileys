@@ -53,9 +53,7 @@ export namespace DEFAULT_CONNECTION_CONFIG {
     export let markOnlineOnConnect: boolean;
     export let syncFullHistory: boolean;
     export function patchMessageBeforeSending(msg: any): any;
-    export function shouldSyncHistoryMessage({ syncType }: {
-        syncType: any;
-    }): boolean;
+    export function shouldSyncHistoryMessage(msg?: any): boolean;
     export function shouldIgnoreJid(): boolean;
     export let linkPreviewImageThumbnailWidth: number;
     export namespace transactionOpts {
