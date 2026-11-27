@@ -4,6 +4,8 @@ export function getMediaKeys(buffer: any, mediaType: any): Promise<{
     cipherKey: any;
     macKey: any;
 }>;
+/** Builds and validates the streaming sidecar used by WhatsApp sound stickers. */
+export function createAudioStreamingSidecar(audio: Uint8Array, mediaKey: Uint8Array, expectedEncryptedHash: Uint8Array): Promise<Buffer>;
 export function getAudioDuration(buffer: any): Promise<any>;
 /**
   referenced from and modifying https://github.com/wppconnect-team/wa-js/blob/main/src/chat/functions/prepareAudioWaveform.ts

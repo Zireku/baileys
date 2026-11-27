@@ -106,6 +106,7 @@ This build is customized and maintained by Zireku for production bot architectur
    - [Image](#image)
    - [Video](#video)
    - [Sticker](#sticker)
+   - [Sound Sticker](#sound-sticker)
    - [Audio](#audio)
    - [Document](#document)
    - [Album (Image & Video)](#album-image--video)
@@ -940,6 +941,28 @@ sock.sendMessage(jid, {
  quoted: message
 })
 ```
+
+#### Sound Sticker
+
+The sticker and its Ogg/Opus audio are uploaded separately. Baileys generates
+and validates the audio streaming sidecar, embeds `AudioMessage` field 26, and
+uses the native `audioStickerMessage` wrapper automatically.
+
+```javascript
+sock.sendMessage(jid, {
+ sticker: await fs.promises.readFile('./path/to/sticker.webp'),
+ stickerAudio: await fs.promises.readFile('./path/to/audio.opus'),
+ stickerAudioSeconds: 10,
+ isAnimated: true,
+ width: 512,
+ height: 512
+}, {
+ quoted: message
+})
+```
+
+`stickerAudio` must be a `Buffer` or `Uint8Array`. Do not set `ptt`; sound
+stickers use their own WhatsApp media envelope rather than a voice-note message.
 
 #### Audio
 
